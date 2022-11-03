@@ -6,7 +6,7 @@ vrrp_script chk_apiserver {
 {% if ansible_facts['os_family'] == "RedHat" %}
        script "/usr/libexec/keepalived/check_apiserver.sh"
 {% else %}
-    script "/etc/keepalived/check_apiserver.sh"
+    script "{{ keepalive_directory }}/check_apiserver.sh"
 {% endif %}
     interval 2
     weight -5
@@ -19,7 +19,7 @@ vrrp_script chk_rke2server {
 {% if ansible_facts['os_family'] == "RedHat" %}
     script "/usr/libexec/keepalived/check_rke2server.sh"
 {% else %}
-    script "/etc/keepalived/check_rke2server.sh"
+    script "{{ keepalive_directory }}/check_rke2server.sh"
 {% endif %}
     interval 2
     weight -5

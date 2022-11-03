@@ -1,4 +1,10 @@
 ---
+# Default RKE2 configuration path
+rke2_config_path: '/etc/rancher/rke2'
+
+# Default keepalive directory
+keepalive_directory: '/etc/keepalived'
+
 # Default nodetaints
 node_taints: []
 
@@ -29,6 +35,12 @@ rke2_api_ip: "{{ hostvars[groups[rke2_servers_group_name].0]['ansible_default_ip
 
 # optiononal option for kubevip load balancer IP range
 # rke2_loadbalancer_ip_range: 192.168.1.50-192.168.1.100
+
+# Version of kube-vip cloud provider
+kube_vip_cloud_provider_version: 'v0.0.4'
+
+# Version of kube-vip
+kube_vip_version: 'v0.5.5'
 
 # Install kubevip cloud provider if rke2_ha_mode_kubevip is true
 rke2_kubevip_cloud_provider_enable: true
@@ -88,6 +100,9 @@ rke2_airgap_copy_sourcepath: local_artifacts
 # Tarball images for additional components to be copied from rke2_airgap_copy_sourcepath to the nodes
 # (File extensions in the list and on the real files must be retained)
 rke2_airgap_copy_additional_tarballs: []
+
+# Set Additional Manifests Image Pull Policy
+rke2_additional_manifests_imagepullpolicy: Always
 
 # Destination for airgap additional images tarballs ( see https://docs.rke2.io/install/airgap/#tarball-method )
 rke2_tarball_images_path: "{{ rke2_data_path }}/agent/images"
@@ -159,7 +174,7 @@ rke2_download_kubeconf_path: /tmp
 rke2_cluster_group_name: k8s_cluster
 
 # Default Ansible Inventory Group name for RKE2 Servers
-rke2_servers_group_name: masters
+rke2_servers_group_name: control_plane
 
 # Default Ansible Inventory Group name for RKE2 Agents
 rke2_agents_group_name: workers

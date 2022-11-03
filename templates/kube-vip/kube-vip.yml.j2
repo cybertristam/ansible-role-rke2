@@ -64,8 +64,8 @@ spec:
           value: "{{ rke2_api_ip }}"
         - name: prometheus_server
           value: :2112
-        image: ghcr.io/kube-vip/kube-vip:v0.5.5
-        imagePullPolicy: Always
+        image: ghcr.io/kube-vip/kube-vip:{{ kube_vip_version }}
+        imagePullPolicy: {{ rke2_additional_manifests_imagepullpolicy }}
         name: kube-vip
         resources: {}
         securityContext:

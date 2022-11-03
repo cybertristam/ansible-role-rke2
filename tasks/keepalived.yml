@@ -16,7 +16,7 @@
 
 - name: Create directory for keepalived
   ansible.builtin.file:
-    path: /etc/keepalived
+    path: {{ keepalive_directory }}
     state: directory
     owner: root
     group: root
@@ -25,7 +25,7 @@
 - name: Create Kubernetes API health check script for Debian OS family
   ansible.builtin.template:
     src: templates/check_apiserver.sh.j2
-    dest: /etc/keepalived/check_apiserver.sh
+    dest: {{ keepalive_directory }}/check_apiserver.sh
     owner: root
     group: root
     mode: 0755
@@ -45,7 +45,7 @@
 - name: Create RKE2 Server health check script for Debian OS family
   ansible.builtin.template:
     src: templates/check_rke2server.sh.j2
-    dest: /etc/keepalived/check_rke2server.sh
+    dest: {{ keepalive_directory }}/check_rke2server.sh
     owner: root
     group: root
     mode: 0755
@@ -65,7 +65,7 @@
 - name: Create keepalived config file
   ansible.builtin.template:
     src: templates/keepalived.conf.j2
-    dest: /etc/keepalived/keepalived.conf
+    dest: {{ keepalive_directory }}/keepalived.conf
     owner: root
     group: root
     mode: 0644
