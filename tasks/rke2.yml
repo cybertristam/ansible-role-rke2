@@ -111,7 +111,7 @@
 - name: Copy Custom Manifests
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ rke2_data_path }}/server/manifests/"
+    dest: "{{ rke2_data_path }}/server/manifests/{{ item | basename | regex_replace('.j2$', '') }}"
     owner: root
     group: root
     mode: 0644
@@ -121,7 +121,7 @@
 - name: Copy Static Pods
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ rke2_data_path }}/agent/pod-manifests/"
+    dest: "{{ rke2_data_path }}/agent/pod-manifests/{{ item | basename | regex_replace('.j2$', '') }}"
     owner: root
     group: root
     mode: 0644
